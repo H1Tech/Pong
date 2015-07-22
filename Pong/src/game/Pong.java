@@ -14,7 +14,6 @@ import javax.swing.Timer;
 public class Pong implements ActionListener, KeyListener{
 
 	private static boolean w, s, up, down;
-
 	public static Pong pong;
 	public int width = 1000, height = 1000;
 	public Renderer renderer;
@@ -71,6 +70,8 @@ public class Pong implements ActionListener, KeyListener{
 		}
 		
 		ball.update();
+		player1.update();
+		player2.update();
 	}
 
 	public void render(Graphics2D g){

@@ -5,7 +5,9 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 public class Ball {
-	private int x, y, velX, velY, diameter;
+	public int x, y, velX, velY, diameter;
+	public final int SPEED = 10;
+	public final double MAX_ANGLE = 5*Math.PI;
 	private Random random;
 	public Ball(Pong pong){
 		diameter = 20;
@@ -26,11 +28,17 @@ public class Ball {
 	}
 	public void render(Graphics2D g){
 		g.setColor(Color.WHITE);
-		g.fillOval(x, y, diameter, diameter);
+		g.fillOval(x-diameter/2, y-diameter/2, diameter, diameter);
 	}
 	public void update(){
 		x += velX;
 		y += velY;
+		testWall();
+	}
+	private void testWall() {
+		if((y <= 0) || (y + 2*diameter >= Pong.pong.height)){
+			velY = velY * -1;
+		}
 	}
 	public void reset(){
 		startUp(Pong.pong);
@@ -40,5 +48,13 @@ public class Ball {
 	}
 	public int getY(){
 		return y;
+	}
+	public int getDiameter(){
+		return diameter;
+	}
+	public void setVel(long velX, long velY) {
+		this.velX = (int) velX;
+		this.velY = (int) velY;
+		
 	}
 }
